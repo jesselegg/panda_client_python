@@ -80,14 +80,15 @@ def generate_signature(verb, request_uri, host, secret_key, params={}):
         host.lower() + "\n" +
         request_uri + "\n" +
         query_string
-    )
-    signature = hmac.new(secret_key, string_to_sign, hashlib.sha256).digest()
+    ).encode("utf-8")
+    signature = hmac.new(secret_key.encode("utf-8"), string_to_sign, hashlib.sha256).digest()
     return base64.b64encode(signature).strip()
 
 
 def urlescape(s):
-    s = unicode(s).encode('utf-8')
-    return urllib.quote(s).replace("%7E", "~").replace(' ', '%20').replace('/', '%2F')
+    if not isinstance(s, bytes):
+        s = s.encode("utf-8")
+    return urllib.parse.quote(s).replace("%7E", "~").replace(' ', '%20').replace('/', '%2F')
 
 
 def canonical_path(path):
@@ -98,7 +99,7 @@ def canonical_querystring(d):
     def recursion(d, base=None):
         pairs = []
 
-        ordered_params = sorted([(k, v) for k, v in d.iteritems()])
+        ordered_params = sorted([(k, v) for k, v in iter(d.items())])
         for key, value in ordered_params:
             if key == 'file':
                 continue
