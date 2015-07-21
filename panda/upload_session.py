@@ -1,6 +1,6 @@
 from requests import post, delete
 from json import loads
-from models import Video
+from .models import Video
 from os import stat
 
 CHUNK_SIZE = 5 * 1024 * 1024
