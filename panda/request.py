@@ -70,7 +70,7 @@ class PandaRequest(object):
             request_uri + "\n" +
             query_string
         )
-        signature = hmac.new(secret_key, string_to_sign, hashlib.sha256).digest()
+        signature = hmac.new(secret_key.encode('utf-8'), string_to_sign, hashlib.sha256).digest()
         return base64.b64encode(signature).strip()
         
     def urlescape(self, s):
