@@ -75,7 +75,8 @@ class PandaRequest(object):
         
     def urlescape(self, s):
         s = s.encode('utf-8')
-        return urllib.quote(s).replace("%7E", "~").replace(' ', '%20').replace('/', '%2F')
+        from urllib.parse import quote
+        return quote(s).replace("%7E", "~").replace(' ', '%20').replace('/', '%2F')
         
     def canonical_path(self, path):
         return '/' + path.strip(' \t\n\r\0\x0B/')
