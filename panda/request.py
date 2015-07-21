@@ -74,7 +74,6 @@ class PandaRequest(object):
         return base64.b64encode(signature).strip()
         
     def urlescape(self, s):
-        s = s.encode('utf-8')
         from urllib.parse import quote
         return quote(s).replace("%7E", "~").replace(' ', '%20').replace('/', '%2F')
         
