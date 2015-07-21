@@ -1,4 +1,4 @@
-from request import PandaRequest
+from .request import PandaRequest
 from models import Video, Cloud, Encoding, Profile, Notifications, PandaDict
 from models import GroupRetriever, SingleRetriever
 from models import PandaError
