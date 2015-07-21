@@ -12,7 +12,7 @@ class PandaRequest(object):
         self.data = data
         self.timestamp = timestamp
 
-        for name, val in self.data.iteritems():
+        for name, val in self.data.items():
             if isinstance(val, dict):
                 self.data[name] = json.dumps(val)
 
@@ -84,7 +84,7 @@ class PandaRequest(object):
         def recursion(d, base=None):
             pairs = []
     
-            ordered_params = sorted([(k, v) for k, v in d.iteritems()])
+            ordered_params = sorted([(k, v) for k, v in d.items()])
             for key, value in ordered_params:
                 if key == 'file':
                     continue
